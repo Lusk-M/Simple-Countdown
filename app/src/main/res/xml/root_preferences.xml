@@ -1,0 +1,21 @@
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory app:title="@string/countdown_header">
+
+        <ListPreference
+            app:defaultValue="auto"
+            app:entries="@array/countdown_pref_entries"
+            app:entryValues="@array/countdown_pref_values"
+            app:key="theme"
+            app:title="@string/color_theme"
+            app:useSimpleSummaryProvider="true" />
+
+        <SwitchPreferenceCompat
+            app:key="negative_countdown"
+            app:title="@string/negative_countdown_title"
+            app:summaryOn="@string/negative_countdown_summary_on"
+            app:summaryOff="@string/negative_countdown_summary_off"/>
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

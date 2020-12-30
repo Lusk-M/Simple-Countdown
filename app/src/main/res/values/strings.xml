@@ -1,0 +1,35 @@
+<resources>
+    <string name="app_name">Simple Countdown</string>
+    <string name="edit_countdown_title">Edit Countdown</string>
+    <string name="delete_countdown_title">Delete Countdown</string>
+    <string name="action_settings_title">Settings</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_settings">Settings Activity</string>
+
+    <string name="create_countdown">Create Countdown</string>
+
+    <!-- Preference Titles -->
+    <string name="countdown_header">Countdown Preferences</string>
+
+    <!-- Countdown Preferences -->
+    <string name="negative_countdown_title">Allow negative countdowns</string>
+    <string name="negative_countdown_summary_on">Countdowns will continue to count into negative numbers</string>
+    <string name="negative_countdown_summary_off">Countdowns will not count into negative numbers</string>
+    <string name="color_theme">Color Theme</string>
+
+    <!-- Text Input Hints -->
+    <string name="hint_time">Time</string>
+    <string name="hint_date">Date</string>
+    <string name="hint_name">Name</string>
+
+    <!-- Text Labels -->
+    <string name="label_event_name">Event Name</string>
+    <string name="label_event_time">Event Time</string>
+    <string name="label_event_date">Event Date</string>
+
+    <!-- Preference Keys -->
+    <string name="key_theme">theme</string>
+    <string name="key_negative_countdown">negative_countdown</string>
+
+</resources>
