@@ -71,16 +71,7 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences sharedPref = getSharedPreferences(SettingsActivity.SETTINGS_SHARED_PREFERENCES, Context.MODE_PRIVATE);
         String userTheme = sharedPref.getString("theme", "auto");
 
-        //Set the app theme based on the users preference
-        if(userTheme.equals("light")) {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-        }
-        else if(userTheme.equals("dark")) {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-        }
-        else {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
-        }
+        setTheme();
 
 
         //Update the countdown data every 5 seconds
@@ -135,10 +126,12 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    @Override
     protected void onResume() {
         super.onResume();
         //Populate the card data upon resume
         createCards();
+        setTheme();
     }
 
     @Override
@@ -302,5 +295,22 @@ public class MainActivity extends AppCompatActivity {
         db.close();
         viewMenu();
         createCards();
+    }
+
+    public void setTheme() {
+        //Get the user settings preference for the app theme
+        SharedPreferences sharedPref = getSharedPreferences(SettingsActivity.SETTINGS_SHARED_PREFERENCES, Context.MODE_PRIVATE);
+        String userTheme = sharedPref.getString("theme", "auto");
+
+        //Set the app theme based on the users preference
+        if(userTheme.equals("light")) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        }
+        else if(userTheme.equals("dark")) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        }
+        else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
+        }
     }
 }
