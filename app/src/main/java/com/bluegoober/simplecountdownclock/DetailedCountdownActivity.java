@@ -140,6 +140,7 @@ public class DetailedCountdownActivity extends AppCompatActivity {
             secondsTextView.setText(secondsString);
             totalSecondsTextView.setText(totalSecondsString);
         }
+        db.close();
 
     }
 
@@ -174,6 +175,7 @@ public class DetailedCountdownActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialogInterface, int i) {
                 DatabaseHelper db= new DatabaseHelper(DetailedCountdownActivity.this);
                 db.deleteCountdown(countdownId);
+                db.close();
                 finish();
             }
         });

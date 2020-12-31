@@ -13,7 +13,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
-import android.widget.Toast;
+
 
 
 import java.time.Instant;
@@ -103,9 +103,7 @@ public class EditCountdown extends AppCompatActivity {
 
             Button editButton = (Button)findViewById(R.id.edit_countdown_button);
             editButton.setText("Edit Countdown");
-
-            Toast toast = Toast.makeText(this, "test", Toast.LENGTH_LONG);
-            toast.show();
+            db.close();
         }
     }
 
@@ -140,6 +138,7 @@ public class EditCountdown extends AppCompatActivity {
         DatabaseHelper db = new DatabaseHelper(this);
         CountdownObject countdownObject = new CountdownObject(countdownId, millisecondTime, countdownName, "", dateTime.toString());
         db.updateCountdown(countdownObject);
+        db.close();
         finish();
     }
 

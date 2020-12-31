@@ -46,6 +46,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put("datetime", countdown.getEventDate());
         contentValues.put("description", countdown.getDesc());
         database.insert("countdowns", null, contentValues);
+        database.close();
         return true;
     }
 
@@ -66,8 +67,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             return countdownObject;
         }
 
-        else
-            return null;
+        else {
+            db.close();
+            return  null;
+        }
     }
 
     public boolean updateCountdown (CountdownObject countdownObject) {
@@ -78,12 +81,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put("datetime", countdownObject.getEventDate());
         contentValues.put("description", countdownObject.getDesc());
         db.update("countdowns", contentValues, "id = ? ", new String[] { Integer.toString(countdownObject.getId()) } );
+        db.close();
         return true;
     }
 
     public Integer deleteCountdown (int id) {
         SQLiteDatabase db = this.getWritableDatabase();
-        return db.delete("countdowns", "id = ? ", new String[] { Integer.toString(id) });
+        int dbDelete = db.delete("countdowns", "id = ? ", new String[] { Integer.toString(id) });;
+        db.close();
+        return dbDelete;
     }
 
     public ArrayList<CountdownObject> getAllCountdowns() {
