@@ -11,7 +11,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
-import android.transition.Explode;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
@@ -28,7 +27,11 @@ public class DetailedCountdownActivity extends AppCompatActivity {
 
     public static final String EXTRA_COUNTDOWN_ID = "countdownId";
     private int countdownId;
+    private int isFavorite;
     DatabaseHelper db;
+    CountdownObject countdownObject;
+    MenuItem favoriteMenu;
+    CollapsingToolbarLayout toolBarLayout;
 
 
     @Override
@@ -39,10 +42,11 @@ public class DetailedCountdownActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         ActionBar ab = getSupportActionBar();
         ab.setDisplayHomeAsUpEnabled(true);
-        CollapsingToolbarLayout toolBarLayout = findViewById(R.id.toolbar_layout);
+        toolBarLayout = findViewById(R.id.toolbar_layout);
         toolBarLayout.setTitle(getTitle());
         String countdownName = (String)getIntent().getExtras().get("countdown_name");
         toolBarLayout.setTitle(countdownName);
+
 
         //Call the method to populate the countdown data
         updateCountdownData();
@@ -68,17 +72,18 @@ public class DetailedCountdownActivity extends AppCompatActivity {
         //Get the countdown id from the intent and query the database for the corresponding countdown
         countdownId = getIntent().getExtras().getInt(EXTRA_COUNTDOWN_ID);
         db = new DatabaseHelper(this);
-        CountdownObject countdownObject = db.getCountdown(countdownId);
+        countdownObject = db.getCountdown(countdownId);
 
         //If the countdown is not null, get the countdown data from the CountdownObject, format it, and update the UI views
         if(countdownObject != null) {
             int id = countdownObject.getId();
+            isFavorite = countdownObject.getIsFavorite();
             long milliTime = countdownObject.getLongDate();
             String name = countdownObject.getName();
             String description = countdownObject.getDesc();
             String eventdate = countdownObject.getEventDate();
 
-            final CountdownObject countdown = new CountdownObject(id, milliTime, name, description, eventdate);
+            final CountdownObject countdown = new CountdownObject(id, milliTime, name, description, eventdate, isFavorite);
 
             TextView dateTextView = (TextView) findViewById(R.id.countdown_date_view);
             DateFormat dateFormat = new SimpleDateFormat("h:mm aa EEE, dd MMM, yyyy");
@@ -139,6 +144,7 @@ public class DetailedCountdownActivity extends AppCompatActivity {
             totalMinutesTextView.setText(totalMinutesString);
             secondsTextView.setText(secondsString);
             totalSecondsTextView.setText(totalSecondsString);
+            toolBarLayout.setTitle(countdown.getName());
         }
         db.close();
 
@@ -147,6 +153,10 @@ public class DetailedCountdownActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_detailed_countdown, menu);
+        favoriteMenu = menu.findItem(R.id.action_favorite_countdown);
+        if(isFavorite == 1) {
+            favoriteMenu.setIcon(R.drawable.baseline_favorite_24);
+        }
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -160,6 +170,9 @@ public class DetailedCountdownActivity extends AppCompatActivity {
                 return true;
             case R.id.action_delete_countdown:
                 deleteCountdown();
+                return true;
+            case R.id.action_favorite_countdown:
+                toggleFavorite();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -187,6 +200,20 @@ public class DetailedCountdownActivity extends AppCompatActivity {
         });
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
+    }
+
+    public void toggleFavorite() {
+        int isFavorite = countdownObject.getIsFavorite();
+        DatabaseHelper db = new DatabaseHelper(this);
+
+        if(isFavorite == 0) {
+            db.setCountdownFavorite(countdownId);
+            favoriteMenu.setIcon(R.drawable.baseline_favorite_24);
+        }
+        else {
+            db.setCountdownNotFavorite(countdownId);
+            favoriteMenu.setIcon(R.drawable.baseline_favorite_border_24);
+        }
     }
 
 }

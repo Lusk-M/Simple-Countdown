@@ -6,9 +6,11 @@ import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.cardview.widget.CardView;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
@@ -84,6 +86,15 @@ public class CountdownRecyclerAdapter extends RecyclerView.Adapter<CountdownRecy
         TextView textMinutesTimeView = cardView.findViewById(R.id.countdown_time_minutes);
         String minutesString = minutesFormatted +"\n minutes";
         textMinutesTimeView.setText(minutesString);
+
+        ImageView favoriteIndicator = cardView.findViewById(R.id.favorite_card_indicator);
+        if(countdowns.get(position).getIsFavorite() == 1) {
+            favoriteIndicator.setVisibility(View.VISIBLE);
+            favoriteIndicator.setColorFilter(ContextCompat.getColor(cardView.getContext(), R.color.colorPrimary));
+        }
+        else {
+            cardView.setCardBackgroundColor(cardView.getResources().getColor(R.color.off_white));
+        }
 
         cardView.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -32,6 +32,7 @@ public class EditCountdown extends AppCompatActivity {
     int countdownId;
     TimePickerDialog timePicker;
     DatePickerDialog datePicker;
+    CountdownObject countdown;
 
     public static final String EDIT_COUNTDOWN_ID = "editId";
 
@@ -79,7 +80,7 @@ public class EditCountdown extends AppCompatActivity {
         if(intent.hasExtra(EDIT_COUNTDOWN_ID)) {
             countdownId = (Integer)intent.getExtras().get(EDIT_COUNTDOWN_ID);
             DatabaseHelper db = new DatabaseHelper(this);
-            CountdownObject countdown = db.getCountdown(countdownId);
+            countdown = db.getCountdown(countdownId);
 
             int countdownId = countdown.getId();
             long milliTime = countdown.getLongDate();
@@ -136,7 +137,7 @@ public class EditCountdown extends AppCompatActivity {
         }
 
         DatabaseHelper db = new DatabaseHelper(this);
-        CountdownObject countdownObject = new CountdownObject(countdownId, millisecondTime, countdownName, "", dateTime.toString());
+        CountdownObject countdownObject = new CountdownObject(countdownId, millisecondTime, countdownName, "", dateTime.toString(), countdown.getIsFavorite());
         db.updateCountdown(countdownObject);
         db.close();
         finish();

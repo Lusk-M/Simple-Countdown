@@ -28,6 +28,7 @@
     <string name="label_event_name">Event Name</string>
     <string name="label_event_time">Event Time</string>
     <string name="label_event_date">Event Date</string>
+    <string name="label_favorite_countdowns">Favorites</string>
 
     <!-- Preference Keys -->
     <string name="key_theme">theme</string>

@@ -15,7 +15,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.InputType;
-import android.transition.Explode;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -40,14 +39,14 @@ import java.util.Calendar;
 public class MainActivity extends AppCompatActivity {
 
     DatabaseHelper db;
-    CountdownRecyclerAdapter recyclerAdapter;
+    CountdownRecyclerAdapter recyclerAdapter, recyclerAdapterFavorite;
     private FloatingActionButton fab;
     private boolean isOpen;
     private ConstraintLayout layoutMain;
     private RelativeLayout layoutContent;
     private RelativeLayout layoutButtons;
     TextView timeTextView, dateTextView;
-    RecyclerView cardRecycler;
+    RecyclerView cardRecycler, favoriteCardRecycler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,11 +65,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         createCards();
-
-        //Get the user settings preference for the app theme
-        SharedPreferences sharedPref = getSharedPreferences(SettingsActivity.SETTINGS_SHARED_PREFERENCES, Context.MODE_PRIVATE);
-        String userTheme = sharedPref.getString("theme", "auto");
-
         setTheme();
 
 
@@ -166,18 +160,27 @@ public class MainActivity extends AppCompatActivity {
     //Create the cards from
     public void createCards() {
         db = new DatabaseHelper(this);
-        ArrayList<CountdownObject> countdownList = db.getAllCountdowns();
-        db.close();
+        ArrayList<CountdownObject> countdownList = db.getNotFavoriteCountdowns();
         recyclerAdapter = new CountdownRecyclerAdapter(countdownList);
         cardRecycler = (RecyclerView) findViewById(R.id.card_recycler);
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this, 1);
         cardRecycler.setLayoutManager(layoutManager);
         cardRecycler.setAdapter(recyclerAdapter);
+
+
+        favoriteCardRecycler = findViewById(R.id.card_recycler_favorites);
+        ArrayList<CountdownObject> countdownFavoritesList = db.getFavoriteCountdowns();
+        recyclerAdapterFavorite = new CountdownRecyclerAdapter(countdownFavoritesList);
+        RecyclerView.LayoutManager layoutManagerFavorite = new GridLayoutManager(this, 1);
+        favoriteCardRecycler.setLayoutManager(layoutManagerFavorite);
+        favoriteCardRecycler.setAdapter(recyclerAdapterFavorite);
+        db.close();
     }
 
     //Update the recyclerAdapter content
     public void updateCountdownRecyclerData() {
         recyclerAdapter.notifyDataSetChanged();
+        recyclerAdapterFavorite.notifyDataSetChanged();
     }
 
     //Method to show and hide the add countdown menu
@@ -287,7 +290,7 @@ public class MainActivity extends AppCompatActivity {
 
         //Create a new instance of the DatabaseHelper, insert the new countdown, and clear the countdown input fields
         DatabaseHelper db = new DatabaseHelper(this);
-        CountdownObject countdownObject = new CountdownObject(0, millisecondTime, countdownName, "", dateTime.toString());
+        CountdownObject countdownObject = new CountdownObject(0, millisecondTime, countdownName, "", dateTime.toString(), 0);
         db.insertCountdown(countdownObject);
         countdownNameInput.setText("");
         countdownDateInput.setText("");

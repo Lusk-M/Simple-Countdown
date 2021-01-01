@@ -13,11 +13,27 @@
         android:id="@+id/layoutContent"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:overScrollMode="always">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:overScrollMode="always">
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/card_recycler_favorites"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:overScrollMode="never"/>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/card_recycler"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scrollbars="vertical"/>
+        android:layout_height="wrap_content"
+        android:overScrollMode="never"/>
+        </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
 
     <RelativeLayout
         android:id="@+id/layoutNewCountdown"

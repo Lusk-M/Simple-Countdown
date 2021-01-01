@@ -2,14 +2,20 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <item android:id="@+id/action_favorite_countdown"
+        android:title="Favorite"
+        android:icon="@drawable/baseline_favorite_border_24"
+        android:orderInCategory="1"
+        app:showAsAction="always" />
+
     <item android:id="@+id/action_edit_countdown"
         android:title="@string/edit_countdown_title"
         android:icon="@drawable/baseline_edit_24"
-        android:orderInCategory="1"
+        android:orderInCategory="2"
         app:showAsAction="ifRoom" />
     <item android:id="@+id/action_delete_countdown"
         android:title="@string/delete_countdown_title"
         android:icon="@drawable/baseline_delete_24"
-        android:orderInCategory="2"
+        android:orderInCategory="3"
         app:showAsAction="ifRoom" />
 </menu>

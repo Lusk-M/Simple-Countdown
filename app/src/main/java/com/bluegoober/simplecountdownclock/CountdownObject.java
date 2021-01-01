@@ -5,18 +5,19 @@ import java.util.Date;
 
 public class CountdownObject {
 
-    private int id;
+    private int id, isFavorite;
     private long milliTime, secondsLeft, seconds, daysLeft, hoursLeft, hours, minutesLeft, minutes;
     private String eventDate;
     private String name, desc;
 
 
-    public CountdownObject(int id, long milliTime, String name, String desc, String eventDate) {
+    public CountdownObject(int id, long milliTime, String name, String desc, String eventDate, int isFavorite) {
         this.id = id;
         this.milliTime = milliTime;
         this.name = name;
         this.desc = desc;
         this.eventDate = eventDate;
+        this.isFavorite = isFavorite;
 
         long currentTime = System.currentTimeMillis();
         long remainingTimeInMilli = milliTime - currentTime;
@@ -96,4 +97,8 @@ public class CountdownObject {
     public long getSeconds() {
         return seconds;
     }
+
+    public int getIsFavorite() {return isFavorite;}
+
+    public void setIsFavorite(int isFavorite) {this.isFavorite = isFavorite;}
 }
