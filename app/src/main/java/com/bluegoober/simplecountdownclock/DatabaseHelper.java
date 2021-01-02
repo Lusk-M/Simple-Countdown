@@ -19,7 +19,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String COUNTDOWNS_COUNTDOWN_DESC = "description";
     public static final String COUNTDOWN_COUNTDOWN_IS_FAVORITE = "isfavorite";
 
-    public final static String CREATE_TABLE = "";
+    public final static String CREATE_TABLE = "create table countdowns " +
+            "(id integer primary key, name text, datemilli text, datetime text, description text, isfavorite int default 0)";
 
 
 
@@ -29,8 +30,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase database) {
-        database.execSQL("create table countdowns " +
-                "(id integer primary key, name text, datemilli text, datetime text, description text, isfavorite int default 0)");
+        database.execSQL(CREATE_TABLE);
     }
 
     @Override
@@ -43,12 +43,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public boolean insertCountdown(CountdownObject countdown) {
         SQLiteDatabase database = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put("name", countdown.getName());
-        contentValues.put("datemilli", countdown.getLongDate());
-        contentValues.put("datetime", countdown.getEventDate());
-        contentValues.put("description", countdown.getDesc());
+        contentValues.put(COUNTDOWNS_COUNTDOWN_NAME, countdown.getName());
+        contentValues.put(COUNTDOWNS_COUNTDOWN_DATE_MILLI, countdown.getLongDate());
+        contentValues.put(COUNTDOWNS_COUNTDOWN_DATETIME, countdown.getEventDate());
+        contentValues.put(COUNTDOWNS_COUNTDOWN_DESC, countdown.getDesc());
         contentValues.put(COUNTDOWN_COUNTDOWN_IS_FAVORITE, countdown.getIsFavorite());
-        database.insert("countdowns", null, contentValues);
+        database.insert(COUNTDOWNS_TABLE_NAME, null, contentValues);
         database.close();
         return true;
     }
@@ -80,18 +80,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public boolean updateCountdown (CountdownObject countdownObject) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put("name", countdownObject.getName());
-        contentValues.put("datemilli", countdownObject.getLongDate());
-        contentValues.put("datetime", countdownObject.getEventDate());
-        contentValues.put("description", countdownObject.getDesc());
-        db.update("countdowns", contentValues, "id = ? ", new String[] { Integer.toString(countdownObject.getId()) } );
+        contentValues.put(COUNTDOWNS_COUNTDOWN_NAME, countdownObject.getName());
+        contentValues.put(COUNTDOWNS_COUNTDOWN_DATE_MILLI, countdownObject.getLongDate());
+        contentValues.put(COUNTDOWNS_COUNTDOWN_DATETIME, countdownObject.getEventDate());
+        contentValues.put(COUNTDOWNS_COUNTDOWN_DESC, countdownObject.getDesc());
+        db.update(COUNTDOWNS_TABLE_NAME, contentValues, "id = ? ", new String[] { Integer.toString(countdownObject.getId()) } );
         db.close();
         return true;
     }
 
     public Integer deleteCountdown (int id) {
         SQLiteDatabase db = this.getWritableDatabase();
-        int dbDelete = db.delete("countdowns", "id = ? ", new String[] { Integer.toString(id) });
+        int dbDelete = db.delete(COUNTDOWNS_TABLE_NAME, "id = ? ", new String[] { Integer.toString(id) });
         db.close();
         return dbDelete;
     }
@@ -169,7 +169,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(COUNTDOWN_COUNTDOWN_IS_FAVORITE, 1);
-        db.update("countdowns", contentValues, "id = ? ", new String[] { Integer.toString(id) } );
+        db.update(COUNTDOWNS_TABLE_NAME, contentValues, "id = ? ", new String[] { Integer.toString(id) } );
         return true;
     }
 
@@ -177,7 +177,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(COUNTDOWN_COUNTDOWN_IS_FAVORITE, 0);
-        db.update("countdowns", contentValues, "id = ? ", new String[] { Integer.toString(id) } );
+        db.update(COUNTDOWNS_TABLE_NAME, contentValues, "id = ? ", new String[] { Integer.toString(id) } );
         return true;
     }
 }
