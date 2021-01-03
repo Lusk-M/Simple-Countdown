@@ -1,7 +1,7 @@
 <resources>
     <!--Countdown Preferences -->
     <string-array name="countdown_pref_entries">
-        <item>Auto</item>
+        <item>Follow System Default</item>
         <item>Light</item>
         <item>Dark</item>
     </string-array>
