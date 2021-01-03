@@ -3,11 +3,10 @@
     <string name="edit_countdown_title">Edit Countdown</string>
     <string name="delete_countdown_title">Delete Countdown</string>
     <string name="action_settings_title">Settings</string>
-
     <string name="action_settings">Settings</string>
     <string name="title_activity_settings">Settings</string>
-
     <string name="create_countdown">Create Countdown</string>
+    <string name="favorite_countdown_icon_desc">Icon of a full heart</string>
 
     <!-- Preference Titles -->
     <string name="countdown_header">Countdown Preferences</string>
