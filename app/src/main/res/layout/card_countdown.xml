@@ -30,6 +30,7 @@
             android:text="@string/label_event_name"
             android:transitionName="countdown_name"/>
         <LinearLayout
+            android:layout_marginBottom="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <TextView
