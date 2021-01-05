@@ -288,16 +288,18 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
-        //Create a new instance of the DatabaseHelper, insert the new countdown, and clear the countdown input fields
-        DatabaseHelper db = new DatabaseHelper(this);
-        CountdownObject countdownObject = new CountdownObject(0, millisecondTime, countdownName, "", dateTime.toString(), 0);
-        db.insertCountdown(countdownObject);
-        countdownNameInput.setText("");
-        countdownDateInput.setText("");
-        countdownTimeInput.setText("");
-        db.close();
-        viewMenu();
-        createCards();
+        if(dateTime != null) {
+            //Create a new instance of the DatabaseHelper, insert the new countdown, and clear the countdown input fields
+            DatabaseHelper db = new DatabaseHelper(this);
+            CountdownObject countdownObject = new CountdownObject(0, millisecondTime, countdownName, "", dateTime.toString(), 0);
+            db.insertCountdown(countdownObject);
+            countdownNameInput.setText("");
+            countdownDateInput.setText("");
+            countdownTimeInput.setText("");
+            db.close();
+            viewMenu();
+            createCards();
+        }
     }
 
     public void setTheme() {
