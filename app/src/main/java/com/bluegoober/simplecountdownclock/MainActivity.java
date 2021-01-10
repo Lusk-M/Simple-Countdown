@@ -207,6 +207,7 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void run() {
                     cardRecycler.setVisibility(View.GONE);
+                    favoriteCardRecycler.setVisibility(View.GONE);
                 }
             }, 200);
 
@@ -228,6 +229,7 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onAnimationStart(Animator animator) {
                     cardRecycler.setVisibility(View.VISIBLE);
+                    favoriteCardRecycler.setVisibility(View.VISIBLE);
                 }
 
                 @Override
