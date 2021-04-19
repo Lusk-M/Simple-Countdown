@@ -11,9 +11,10 @@
         android:layout_height="45dp"
         android:layout_marginTop="8dp"
         android:ems="10"
+        android:textSize="26sp"
         android:focusableInTouchMode="false"
         android:gravity="center"
-        android:hint="@string/hint_time"
+        android:hint="@string/label_event_time"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextName" />
@@ -24,9 +25,10 @@
         android:layout_height="45dp"
         android:layout_marginTop="8dp"
         android:ems="10"
+        android:textSize="26sp"
         android:focusableInTouchMode="false"
         android:gravity="center"
-        android:hint="@string/hint_date"
+        android:hint="@string/label_event_date"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextTime" />
@@ -64,26 +66,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/editTextName" />
 
-    <TextView
-        android:id="@+id/timeLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:text="@string/label_event_time"
-        app:layout_constraintBottom_toBottomOf="@+id/editTextTime"
-        app:layout_constraintEnd_toStartOf="@+id/editTextTime"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/editTextTime" />
 
-    <TextView
-        android:id="@+id/dateLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:text="@string/label_event_date"
-        app:layout_constraintBottom_toBottomOf="@+id/editTextDate"
-        app:layout_constraintEnd_toStartOf="@+id/editTextDate"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/editTextDate" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
