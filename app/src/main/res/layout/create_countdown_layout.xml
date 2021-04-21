@@ -35,7 +35,7 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/editTextLayout"
-        android:layout_width="wrap_content"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:hint="@string/label_event_name"
         android:layout_marginTop="18dp"
@@ -45,7 +45,7 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/editTextName"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textCapWords"
@@ -57,6 +57,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
+        android:padding="15dp"
         android:onClick="onClickSubmit"
         android:text="@string/create_countdown"
         app:layout_constraintEnd_toEndOf="parent"
