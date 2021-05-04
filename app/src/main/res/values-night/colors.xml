@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <color name="colorPrimary">#153666</color>
     <color name="colorPrimaryDark">#000333</color>
     <color name="colorPrimaryLight">#63a4ff</color>
@@ -7,5 +7,5 @@
     <color name="colorAccentDark">#8e0000</color>
     <color name="ic_launcher_background">#fff</color>
     <color name="off_white">#212121</color>
-    <color name="mtrl_textinput_default_box_stroke_color">#fff</color>
+    <color name="mtrl_textinput_default_box_stroke_color" tools:override="true">#36ffffff</color>
 </resources>
