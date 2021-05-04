@@ -90,7 +90,7 @@ public class CountdownRecyclerAdapter extends RecyclerView.Adapter<CountdownRecy
         ImageView favoriteIndicator = cardView.findViewById(R.id.favorite_card_indicator);
         if(countdowns.get(position).getIsFavorite() == 1) {
             favoriteIndicator.setVisibility(View.VISIBLE);
-            favoriteIndicator.setColorFilter(ContextCompat.getColor(cardView.getContext(), R.color.colorPrimary));
+            favoriteIndicator.setColorFilter(ContextCompat.getColor(cardView.getContext(), R.color.colorAccent));
         }
         else {
             cardView.setCardBackgroundColor(cardView.getResources().getColor(R.color.off_white));

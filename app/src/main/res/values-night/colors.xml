@@ -7,4 +7,5 @@
     <color name="colorAccentDark">#8e0000</color>
     <color name="ic_launcher_background">#fff</color>
     <color name="off_white">#212121</color>
+    <color name="mtrl_textinput_default_box_stroke_color">#fff</color>
 </resources>
