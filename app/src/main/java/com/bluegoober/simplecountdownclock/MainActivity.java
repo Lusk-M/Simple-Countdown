@@ -159,15 +159,19 @@ public class MainActivity extends AppCompatActivity {
 
     //Create the cards from
     public void createCards() {
+        //New instance of database
         db = new DatabaseHelper(this);
+        //Get ArrayList of countdown objects
         ArrayList<CountdownObject> countdownList = db.getNotFavoriteCountdowns();
+
+        //Setup RecyclerView, layout, and adapter, then set them
         recyclerAdapter = new CountdownRecyclerAdapter(countdownList);
         cardRecycler = (RecyclerView) findViewById(R.id.card_recycler);
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this, 1);
         cardRecycler.setLayoutManager(layoutManager);
         cardRecycler.setAdapter(recyclerAdapter);
 
-
+        //Setup RecyclerView, layout, and adapter, then set them
         favoriteCardRecycler = findViewById(R.id.card_recycler_favorites);
         ArrayList<CountdownObject> countdownFavoritesList = db.getFavoriteCountdowns();
         recyclerAdapterFavorite = new CountdownRecyclerAdapter(countdownFavoritesList);
