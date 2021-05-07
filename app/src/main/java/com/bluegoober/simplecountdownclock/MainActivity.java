@@ -111,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
                         new DatePickerDialog.OnDateSetListener() {
                             @Override
                             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                                dateTextView.setText(String.format("%02d/%02d/%04d", dayOfMonth, (monthOfYear + 1), year));
+                                dateTextView.setText(String.format("%02d/%02d/%04d", (monthOfYear + 1), dayOfMonth, year));
                             }
                         }, year, month, day);
                 picker.show();
@@ -277,7 +277,8 @@ public class MainActivity extends AppCompatActivity {
         //Get the countdown date and parse it into a LocalDate object
         TextView countdownDateInput = (TextView) findViewById(R.id.editTextDate);
         String countdownDate = countdownDateInput.getText().toString();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        //DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
         if(countdownDate.length() > 0) {
             date = LocalDate.parse(countdownDate, formatter);
         }
