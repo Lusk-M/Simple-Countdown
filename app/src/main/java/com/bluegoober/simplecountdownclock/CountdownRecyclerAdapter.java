@@ -102,7 +102,7 @@ public class CountdownRecyclerAdapter extends RecyclerView.Adapter<CountdownRecy
                 Intent intent = new Intent(cardView.getContext(), DetailedCountdownActivity.class);
                 intent.putExtra(DetailedCountdownActivity.EXTRA_COUNTDOWN_ID, countdownObject.getId());
                 intent.putExtra("countdown_name", countdownObject.getName());
-                    cardView.getContext().startActivity(intent);
+                cardView.getContext().startActivity(intent);
             }
         });
     }
